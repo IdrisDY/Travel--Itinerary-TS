@@ -25,8 +25,6 @@ const Card: React.FC<CardProps> = ({
     setIsFormVisible(false);
   };
 
-  const toggleForm = () => setIsFormVisible(!isFormVisible);
-
   return (
     <>
       {/* Card */}
@@ -48,55 +46,6 @@ const Card: React.FC<CardProps> = ({
         </button>
       </div>
 
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-          <div className="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 relative">
-            {/* Close Button */}
-            <button
-              onClick={toggleModal}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
-            >
-              ✕
-            </button>
-
-            {/* Modal Content */}
-            <h2 className="text-lg font-bold mb-4">Details for {title}</h2>
-            <p className="text-gray-600 mb-6">{description}</p>
-
-            {/* Button to Show Form */}
-            <button
-              onClick={toggleForm}
-              className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
-            >
-              {isFormVisible ? "Hide Form" : "Add New Item"}
-            </button>
-
-            {/* Form */}
-            {isFormVisible && (
-              <form className="mt-4 space-y-4">
-                <div>
-                  <label htmlFor="item-name" className="block text-gray-700">
-                    Item Name
-                  </label>
-                  <input
-                    type="text"
-                    id="item-name"
-                    className="border rounded w-full py-2 px-3 mt-1 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    placeholder="Enter item name"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white py-2 px-4 w-full rounded hover:bg-blue-600"
-                >
-                  Submit
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
     </>
   );
 };

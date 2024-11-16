@@ -71,18 +71,6 @@ function App() {
             </div>
 
             <div className="bg-primary">
-              <div className="flex flex-col lg:flex-row gap-4 lg:gap-0 justify-between px-6 pt-4  mb-6 items-center">
-                <button className="flex gap-[4px] font-semibold text-altBlackHeaderText items-center">
-                  {" "}
-                  <PiAirplaneInFlightLight /> Flights{" "}
-                </button>
-
-                <button className="font-semibold bg-white w-full lg:w-auto text-sm py-3 px-6 text-mainBlue rounded-[4px] ">
-                  {" "}
-                  Add Flight{" "}
-                </button>
-              </div>
-
               <FlightsList />
             </div>
             <HotelsList />
