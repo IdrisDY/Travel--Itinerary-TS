@@ -17,7 +17,7 @@ const HotelsList = () => {
       </div>
 
       <div className="flex flex-col gap-6">
-        {Array.from({ length: 2 }).map((item) => {
+        {Array.from({ length: 2 }).map(() => {
           return <HotelCard />;
         })}
       </div>

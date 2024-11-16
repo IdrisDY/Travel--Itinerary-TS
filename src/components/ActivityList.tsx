@@ -17,7 +17,7 @@ const ActivityList = () => {
       </div>
 
       <div className="flex flex-col gap-6">
-        {Array.from({ length: 3 }).map((item) => {
+        {Array.from({ length: 3 }).map(() => {
           return <ActivityCard />;
         })}
       </div>
