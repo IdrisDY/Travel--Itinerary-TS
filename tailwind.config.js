@@ -2,6 +2,9 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    screens: {
+      laptop: "990px",
+    },
     extend: {
       colors: {
         primary: "#F0F2F5",
@@ -16,6 +19,11 @@ export default {
         darkBlue: "#000031",
         altBlackHeaderText: "#1D2433",
         lighterBlue: "#0A369D",
+        cardDetailsBorder: "#E4E7EC",
+        flightCardIconColor: "#475367",
+      },
+      screens: {
+        lg: "990px",
       },
     },
   },

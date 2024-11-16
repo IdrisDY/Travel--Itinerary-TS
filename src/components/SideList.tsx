@@ -1,14 +1,4 @@
-import React from "react";
-import {
-  MdOutlineTravelExplore,
-  MdOutlineApartment,
-  MdOutlineFlight,
-  MdOutlineSchool,
-  MdOutlineNewspaper,
-  MdOutlineMedicalServices,
-  MdOutlineLuggage,
-  MdOutlineLocalShipping,
-} from "react-icons/md";
+import React, { useState } from "react";
 import {
   PiRoadHorizonLight,
   PiBuildingsLight,
@@ -18,14 +8,13 @@ import {
   PiSuitcaseRollingLight,
   PiFirstAidKitLight,
   PiPackageLight,
-  PiArrowUp,
-  PiArrowDown,
-  PiCaretUpDownLight,
-  PiCaretDownLight,
   PiCaretUpLight,
+  PiCaretDownLight,
 } from "react-icons/pi";
 
 const SideList = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const items = [
     { label: "Activities", icon: PiRoadHorizonLight },
     { label: "Hotels", icon: PiBuildingsLight },
@@ -37,42 +26,68 @@ const SideList = () => {
     { label: "Vacation Packages", icon: PiPackageLight },
   ];
 
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+
   return (
-    <div className=" bg-white rounded-[4px] py-[24px] px-[22px] gap-3">
-      <div>
-        {items.map((item, index) => (
-          <div
-            key={index}
-            className="flex py-[12px] px-[14px] items-center gap-4 text-iconGrey hover:text-blue-500 transition-colors"
-          >
-            <item.icon size={24} />
-            <span className="text-left font-[500] whitespace-nowrap text-greyText">
-              {item.label}
-            </span>
+    <div className="relative">
+      {/* Swipeable Drawer/Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-fit lg:pb-12 rounded-[4px] bg-white shadow-lg z-40 transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform lg:translate-x-0 lg:relative lg:shadow-none lg:flex lg:flex-col lg:w-64`}
+      >
+        {/* List of Items */}
+        <div className="p-4">
+          {items.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={index}
+                className="flex py-3 pl-3 pr-0 items-center gap-2 text-iconGrey hover:text-blue-500 transition-colors"
+              >
+                <Icon size={24} />
+                <span className="text-left text-sm font-medium text-greyText">
+                  {item.label}
+                </span>
+              </div>
+            );
+          })}
+
+          <div className="bg-gray-100 mt-[64px] p-4 flex items-center justify-between rounded-lg">
+            <div className="flex items-center gap-2">
+              <button className="bg-blue-500 text-white py-2 px-4 rounded-lg font-medium">
+                Go
+              </button>
+              <span className="text-sm text-gray-600">Personal Account</span>
+            </div>
+
+            <div className="flex flex-col items-center justify-center">
+              <button className="text-gray-500 hover:text-blue-500">
+                <PiCaretUpLight size={18} />
+              </button>
+              <button className="text-gray-500 hover:text-blue-500">
+                <PiCaretDownLight size={18} />
+              </button>
+            </div>
           </div>
-        ))}
+        </div>
+        {/* Account Section */}
       </div>
 
-      <div className="bg-primary mt-16 p-[18px_22px_18px_14px] items-center gap-6 flex rounded-[4px] ">
-        <div className="flex items-center gap-2">
-          <button className="bg-mainBlue font-[500] text-white p-[13px_14px] rounded-[4px]">
-            Go
-          </button>
-          <span className="text-sm text-greyText whitespace-nowrap">
-            Personal Account
-          </span>
-        </div>
+      {/* Dark Overlay for Focus */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          onClick={toggleSidebar}
+        ></div>
+      )}
 
-        <div className="flex flex-col items-center justify-center">
-          <button>
-            {" "}
-            <PiCaretUpLight />{" "}
-          </button>
-          <button>
-            {" "}
-            <PiCaretDownLight />{" "}
-          </button>
-        </div>
+      {/* Handle for Sidebar */}
+      <div
+        className="fixed top-1/2 -translate-y-1/2 left-2 h-10 w-10 bg-blue-500 text-white rounded-full flex items-center justify-center z-50 lg:hidden cursor-pointer"
+        onClick={toggleSidebar}
+      >
+        {isSidebarOpen ? "×" : "☰"}
       </div>
     </div>
   );

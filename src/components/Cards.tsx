@@ -32,7 +32,7 @@ const Cards = () => {
   ];
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex flex-wrap lg:flex-nowrap mt-5 justify-center  lg:justify-start items-center gap-1">
       {cardsData.map((item, i) => (
         <Card
           key={i}
