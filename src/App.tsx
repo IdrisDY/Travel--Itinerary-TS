@@ -2,7 +2,6 @@ import NavHeader from "./components/header";
 import SideList from "./components/SideList";
 import banner from "./assets/banner.png";
 import {
-  PiAirplaneInFlightLight,
   PiArrowRight,
   PiCalendarBlank,
   PiDotsThreeBold,

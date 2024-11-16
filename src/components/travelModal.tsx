@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import {
-  searchFlight,
-  searchHotels,
-  //   searchAttractions,
-} from "../../services/Flights/index";
+import { searchFlight, searchHotels } from "../../services/Flights/index";
 import { formatDate } from "../../utils/helper/index";
 
 type SearchType = "flights" | "hotels" | "attractions";
@@ -15,6 +11,24 @@ interface TravelModalProps {
   flightParams?: Record<string, any>;
 }
 
+interface FlightSegment {
+  departureAirport: {
+    name: string;
+  };
+  arrivalAirport: {
+    name: string;
+  };
+  departureDate: string;
+}
+
+interface FlightOffer {
+  segments: FlightSegment[];
+}
+
+interface FlightResponseData {
+  flightOffers: FlightOffer[];
+}
+
 const TravelModal: React.FC<TravelModalProps> = ({
   toggleModal,
   isModalOpen,
@@ -23,12 +37,9 @@ const TravelModal: React.FC<TravelModalProps> = ({
   const [searchType, setSearchType] = useState<SearchType>("flights");
   const [searchQuery, setSearchQuery] = useState("BOM.AIRPORT");
   const [toQuery, setToQuery] = useState("DEL.AIRPORT");
-  const [hotelsQuery, setHotelsQuery] = useState("");
   const [departDate, setDepartDate] = useState(flightParams?.departDate || "");
-  const [data, setData] = useState<any[]>([]);
-  const [searchClicked, setSearchClicked] = useState(false);
+  const [data, setData] = useState<FlightResponseData | null>(null);
 
-  // Determine API function and params based on search type
   const fetchFunction = () => {
     switch (searchType) {
       case "hotels":
@@ -46,7 +57,17 @@ const TravelModal: React.FC<TravelModalProps> = ({
         };
         return searchHotels(hotelParams);
       case "attractions":
-      // return searchAttractions({ location: searchQuery });
+        return searchFlight({
+          fromId: searchQuery,
+          toId: toQuery,
+          pageNo: "1",
+          adults: "1",
+          children: "0,17",
+          sort: "BEST",
+          cabinClass: "ECONOMY",
+          currency_code: "AED",
+          departDate: departDate,
+        });
       default:
         return searchFlight({
           fromId: searchQuery,
@@ -77,8 +98,7 @@ const TravelModal: React.FC<TravelModalProps> = ({
 
   useEffect(() => {
     if (response) {
-      setData(response.data || []);
-      setSearchClicked(false);
+      setData(response.data || null);
     }
   }, [response]);
 
@@ -98,12 +118,13 @@ const TravelModal: React.FC<TravelModalProps> = ({
 
   const handleSearch = () => {
     refetch();
-    setSearchClicked(true);
   };
 
+  // Type check if data is not null and contains flightOffers
   const flightSegments =
-    searchType === "flights" &&
-    data?.flightOffers?.map((item: any) => item.segments[0]);
+    searchType === "flights" && data && Array.isArray(data.flightOffers)
+      ? data.flightOffers.map((item) => item.segments[0])
+      : [];
 
   return (
     <>
@@ -141,13 +162,7 @@ const TravelModal: React.FC<TravelModalProps> = ({
               <label className="block">From</label>
               <input
                 type="text"
-                value={
-                  searchType == "flights"
-                    ? searchQuery
-                    : searchType == "hotels"
-                    ? "hotelsQuery"
-                    : "attractionsQuery"
-                }
+                value={searchType === "flights" ? searchQuery : ""}
                 onChange={(e) => handleInputChange(e, "from")}
                 className="border rounded w-full py-2 px-3 mt-1"
                 placeholder={
@@ -189,31 +204,12 @@ const TravelModal: React.FC<TravelModalProps> = ({
             {isLoading && <p>Loading...</p>}
             {isError && <p>Error loading {searchType} data.</p>}
             <div className="mt-6">
-              {data && data.length > 0 ? (
+              {data &&
+              Array.isArray(data.flightOffers) &&
+              data.flightOffers.length > 0 ? (
                 <div>
-                  {searchType === "hotels" &&
-                    data.map((hotel: any, index: number) => (
-                      <div key={index} className="border-b py-4">
-                        <h3 className="font-bold">{hotel.hotelName}</h3>
-                        <p>Location: {hotel.city}</p>
-                        <p>
-                          Price: {hotel.price} {hotel.currencyCode}
-                        </p>
-                        <button
-                          onClick={() =>
-                            localStorage.setItem(
-                              `hotel${index + 1}`,
-                              JSON.stringify(hotel)
-                            )
-                          }
-                          className="mt-2 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
-                        >
-                          Add to Itinerary
-                        </button>
-                      </div>
-                    ))}
                   {searchType === "flights" &&
-                    flightSegments?.map((item: any, index: number) => (
+                    flightSegments?.map((item, index) => (
                       <div key={index} className="border-b py-4">
                         <p>From: {item.arrivalAirport.name}</p>
                         <p>To: {item.departureAirport.name}</p>

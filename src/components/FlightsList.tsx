@@ -5,7 +5,6 @@ import TravelModal from "./travelModal";
 
 const FlightsList = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [flightParams, setFlightParams] = useState();
 
   return (
     <div className="px-2 lg:px-6 flex flex-col pb-[52px] gap-6">
@@ -30,7 +29,6 @@ const FlightsList = () => {
       <TravelModal
         toggleModal={() => setOpenModal((prev) => !prev)}
         isModalOpen={openModal}
-        flightParams={flightParams}
       />
     </div>
   );

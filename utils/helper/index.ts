@@ -1,4 +1,10 @@
-export const formatDate = (myDate: Date): string => {
+export const formatDate = (myDate: Date | string): string => {
+  const dateObj = typeof myDate === "string" ? new Date(myDate) : myDate;
+
+  if (isNaN(dateObj.getTime())) {
+    return "Invalid date";
+  }
+
   const options: Intl.DateTimeFormatOptions = {
     weekday: "long",
     year: "numeric",
@@ -9,5 +15,5 @@ export const formatDate = (myDate: Date): string => {
     second: "2-digit",
   };
 
-  return new Intl.DateTimeFormat("en-US", options).format(myDate);
+  return new Intl.DateTimeFormat("en-US", options).format(dateObj);
 };
