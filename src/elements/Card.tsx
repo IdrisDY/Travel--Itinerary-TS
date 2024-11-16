@@ -18,7 +18,7 @@ const Card: React.FC<CardProps> = ({
   cardClassName,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [, setIsFormVisible] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
