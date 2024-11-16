@@ -1,16 +1,9 @@
-import React from "react";
 import {
-  PiBedLight,
-  PiCalendarBlank,
   PiCaretCircleDownLight,
-  PiCaretCircleUpDownLight,
   PiCaretCircleUpLight,
   PiClockLight,
   PiMapPinLight,
   PiStarFill,
-  PiStarLight,
-  PiSwimmingPoolLight,
-  PiWineLight,
   PiXLight,
 } from "react-icons/pi";
 import activitybg from "../assets/activitybg.png";

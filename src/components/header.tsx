@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaSearch, FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import { CiHome, CiBellOn } from "react-icons/ci";
 import {

@@ -1,7 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
 import NavHeader from "./components/header";
 import SideList from "./components/SideList";
 import banner from "./assets/banner.png";
@@ -9,18 +5,14 @@ import {
   PiAirplaneInFlightLight,
   PiArrowRight,
   PiCalendarBlank,
-  PiDotsThree,
   PiDotsThreeBold,
   PiUserPlus,
 } from "react-icons/pi";
 import Cards from "./components/Cards";
 import FlightsList from "./components/FlightsList";
-import FlightCard from "./elements/FlightCard";
-import HotelCard from "./elements/HotelCard";
 import HotelsList from "./components/HotelsList";
 import ActivityList from "./components/ActivityList";
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <>

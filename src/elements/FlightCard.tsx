@@ -1,6 +1,4 @@
-import React from "react";
 import flightIcon from "../assets/flighticon.svg";
-import { FaSuitcase, FaUtensils, FaUsb, FaFilm } from "react-icons/fa";
 import {
   PiAirplaneLanding,
   PiSuitcaseRollingLight,

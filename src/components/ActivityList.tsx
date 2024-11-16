@@ -1,4 +1,3 @@
-import React from "react";
 import ActivityCard from "../elements/ActivityCard";
 import { PiRoadHorizonLight } from "react-icons/pi";
 

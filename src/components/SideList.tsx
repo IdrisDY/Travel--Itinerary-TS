@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   PiRoadHorizonLight,
   PiBuildingsLight,
@@ -11,6 +10,7 @@ import {
   PiCaretUpLight,
   PiCaretDownLight,
 } from "react-icons/pi";
+import { useState } from "react";
 
 const SideList = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

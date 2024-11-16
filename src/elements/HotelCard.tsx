@@ -1,10 +1,8 @@
-import React from "react";
 import {
   PiBedLight,
   PiCalendarBlank,
   PiMapPinLight,
   PiStarFill,
-  PiStarLight,
   PiSwimmingPoolLight,
   PiWineLight,
   PiXLight,

@@ -1,4 +1,3 @@
-import React from "react";
 import FlightCard from "../elements/FlightCard";
 
 const FlightsList = () => {

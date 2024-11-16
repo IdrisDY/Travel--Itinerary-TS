@@ -1,4 +1,3 @@
-import React from "react";
 import HotelCard from "../elements/HotelCard";
 import { PiWarehouseLight } from "react-icons/pi";
 
