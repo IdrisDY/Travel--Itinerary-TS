@@ -1,7 +1,13 @@
-export const formatDate = (myDate: Date | string): string => {
+export const formatDate = (
+  myDate: Date | string | undefined | null
+): string => {
+  if (!myDate) {
+    return "Invalid date";
+  }
+
   const dateObj = typeof myDate === "string" ? new Date(myDate) : myDate;
 
-  if (isNaN(dateObj.getTime())) {
+  if (!(dateObj instanceof Date) || isNaN(dateObj.getTime())) {
     return "Invalid date";
   }
 
