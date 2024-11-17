@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { searchFlight, searchHotels } from "../../services/Flights/index";
 import { formatDate } from "../../utils/helper/index";
+import HotelsInput from "./hotelsInput";
 
 type SearchType = "flights" | "hotels" | "attractions";
 
@@ -158,47 +159,50 @@ const TravelModal: React.FC<TravelModalProps> = ({
             </div>
 
             {/* Input Fields */}
-            <div>
-              <label className="block">From</label>
-              <input
-                type="text"
-                value={searchType === "flights" ? searchQuery : ""}
-                onChange={(e) => handleInputChange(e, "from")}
-                className="border rounded w-full py-2 px-3 mt-1"
-                placeholder={
-                  searchType === "flights"
-                    ? "From airport"
-                    : "Enter location (e.g., city)"
+            {searchType === "flights" && (
+              <div>
+                <label className="block">From</label>
+                <input
+                  type="text"
+                  value={searchType === "flights" ? searchQuery : ""}
+                  onChange={(e) => handleInputChange(e, "from")}
+                  className="border rounded w-full py-2 px-3 mt-1"
+                  placeholder={
+                    searchType === "flights"
+                      ? "From airport"
+                      : "Enter location (e.g., city)"
+                  }
+                />
+                {
+                  <div className="mt-4">
+                    <label className="block">To</label>
+                    <input
+                      type="text"
+                      value={toQuery}
+                      onChange={(e) => handleInputChange(e, "to")}
+                      className="border rounded w-full py-2 px-3 mt-1"
+                      placeholder="To airport"
+                    />
+                  </div>
                 }
-              />
-              {searchType === "flights" && (
                 <div className="mt-4">
-                  <label className="block">To</label>
+                  <label className="block">Departure Date</label>
                   <input
-                    type="text"
-                    value={toQuery}
-                    onChange={(e) => handleInputChange(e, "to")}
+                    type="date"
+                    value={departDate}
+                    onChange={(e) => handleInputChange(e, "date")}
                     className="border rounded w-full py-2 px-3 mt-1"
-                    placeholder="To airport"
                   />
                 </div>
-              )}
-              <div className="mt-4">
-                <label className="block">Departure Date</label>
-                <input
-                  type="date"
-                  value={departDate}
-                  onChange={(e) => handleInputChange(e, "date")}
-                  className="border rounded w-full py-2 px-3 mt-1"
-                />
+                <button
+                  onClick={handleSearch}
+                  className="bg-mainBlue text-white py-2 px-4 w-full rounded mt-4 hover:bg-blue-600"
+                >
+                  Search {searchType}
+                </button>
               </div>
-              <button
-                onClick={handleSearch}
-                className="bg-blue-500 text-white py-2 px-4 w-full rounded mt-4 hover:bg-blue-600"
-              >
-                Search {searchType}
-              </button>
-            </div>
+            )}
+            {searchType == "hotels" && <HotelsInput />}
 
             {/* Results Section */}
             {isLoading && <p>Loading...</p>}
@@ -221,7 +225,7 @@ const TravelModal: React.FC<TravelModalProps> = ({
                               JSON.stringify(item)
                             )
                           }
-                          className="mt-2 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+                          className="mt-2 bg-mainBlue text-white py-2 px-4 rounded hover:bg-blue-600"
                         >
                           Add to Itinerary
                         </button>

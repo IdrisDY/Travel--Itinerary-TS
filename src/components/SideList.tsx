@@ -29,7 +29,7 @@ const SideList = () => {
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   return (
-    <div className="relative  pl-10 ">
+    <div className="relative ">
       {/* Swipeable Drawer/Sidebar */}
       <div
         className={`fixed top-0 left-0 h-full lg:h-fit lg:pb-12 rounded-[4px] bg-white shadow-lg z-40 transform ${

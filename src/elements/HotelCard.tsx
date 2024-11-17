@@ -95,7 +95,7 @@ const HotelCard = () => {
         </div>
       </div>
 
-      <div className="bg-[#FBEAE9] min-w-[30px] justify-center items-center flex min-h-full  ">
+      <div className="bg-[#FBEAE9] min-w-[30px] h-[50px] lg:h-full justify-center items-center flex min-h-full  ">
         <PiXLight color="#9E0A05" />
       </div>
     </div>

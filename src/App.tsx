@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <NavHeader />
-      <div className=" mt-[84px] py-[39px] gap-16 md:pl-[40px] md:pr-[38px] flex flex-col  lg:grid grid-cols-[.5fr_6fr] min-h-screen bg-primary">
+      <div className=" mt-[84px] py-[39px] gap-16 lg:px-[40px] md:pr-[38px] flex flex-col  lg:grid grid-cols-[.5fr_6fr] min-h-screen bg-primary">
         <SideList />
         <main className="bg-white lg:p-8 px-2  rounded-[4px] ">
           {/* Banner Section */}

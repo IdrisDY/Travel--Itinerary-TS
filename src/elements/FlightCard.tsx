@@ -124,7 +124,7 @@ const FlightCard = () => {
           <button className="text-mainBlue">Edit details</button>
         </div>
       </div>
-      <div className="bg-[#FBEAE9] min-w-[30px] justify-center items-center flex min-h-full  ">
+      <div className="bg-[#FBEAE9] min-w-[30px] justify-center  lg:min-h-full  items-center flex min-h-[50px]  ">
         <PiXLight color="#9E0A05" />
       </div>
     </div>
